@@ -123,17 +123,17 @@ namespace booklish.Controllers
 
             if (ModelState.IsValid)
             {
-				var dbOrders = await _context.Orders.FindAsync(id);
-				if (dbOrders == null)
+				var ordersData = await _context.Orders.FindAsync(id);
+				if (ordersData == null)
 				{
 					return NotFound();
 				}
 
-                dbOrders.status = order.status;
+                ordersData.status = order.status;
 
 				try
 				{
-                    _context.Update(dbOrders);
+                    _context.Update(ordersData);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
